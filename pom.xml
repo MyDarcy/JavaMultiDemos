@@ -1,0 +1,34 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.darcy.multidemos</groupId>
+  <artifactId>multi-demos</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <modules>
+    <module>HiveDemo</module>
+    <module>SparkDemo</module>
+    <module>ssm</module>
+    <module>flink-demo</module>
+  </modules>
+  <packaging>pom</packaging>
+
+  <name>multi-demos</name>
+  <url>http://maven.apache.org</url>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <junit.version>4.12</junit.version>
+  </properties>
+
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>junit</groupId>
+        <artifactId>junit</artifactId>
+        <version>${junit.version}</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
+</project>
