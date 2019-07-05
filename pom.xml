@@ -10,6 +10,8 @@
     <module>SparkDemo</module>
     <module>ssm</module>
     <module>flink-demo</module>
+    <module>spring-learning</module>
+      <module>spring-mvc</module>
   </modules>
   <packaging>pom</packaging>
 
@@ -19,6 +21,8 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <junit.version>4.12</junit.version>
+    <spring.version>4.3.24.RELEASE</spring.version>
+    <lombok.version>1.18.8</lombok.version>
   </properties>
 
   <dependencyManagement>
@@ -28,6 +32,60 @@
         <artifactId>junit</artifactId>
         <version>${junit.version}</version>
       </dependency>
+
+      <!-- 4.Spring -->
+      <!-- 1)Spring核心 -->
+      <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-core</artifactId>
+        <version>${spring.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-beans</artifactId>
+        <version>${spring.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-context</artifactId>
+        <version>${spring.version}</version>
+      </dependency>
+      <!-- 2)Spring DAO层 -->
+      <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-jdbc</artifactId>
+        <version>${spring.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-tx</artifactId>
+        <version>${spring.version}</version>
+      </dependency>
+      <!-- 3)Spring web -->
+      <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-web</artifactId>
+        <version>${spring.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-webmvc</artifactId>
+        <version>${spring.version}</version>
+      </dependency>
+      <!-- 4)Spring test -->
+      <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-test</artifactId>
+        <version>${spring.version}</version>
+      </dependency>
+
+      <!-- lombok 简化getter/setter; construction -->
+      <dependency>
+        <groupId>org.projectlombok</groupId>
+        <artifactId>lombok</artifactId>
+        <version>${lombok.version}</version>
+      </dependency>
+
     </dependencies>
   </dependencyManagement>
 

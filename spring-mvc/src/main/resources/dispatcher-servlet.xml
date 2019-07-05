@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!--
+    前端控制器dispatcher-servlet使用的ApplicationContext。这里有一个命名规范，如果Spring前端控制器的名称是X，
+    那么Spring会寻找X-servlet.xml作为其配置文件的名称。当然这是针对没有显式配置contextConfigLocation的情况。
+    如果web.xml中配置了 contextConfigLocation，那么相应的Spring配置文件名就是任意的。
+    -->
+    <bean id="viewResolver"
+          class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
+        <property name="prefix" value="/WEB-INF/jsp/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
+    <mvc:default-servlet-handler/>
+    <mvc:annotation-driven/>
+    <context:component-scan base-package="com.darcy"/>
+</beans>

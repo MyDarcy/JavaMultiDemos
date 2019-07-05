@@ -6,26 +6,63 @@
 	http://www.springframework.org/schema/context
 	http://www.springframework.org/schema/context/spring-context.xsd">
 	<!-- 配置整合mybatis过程 -->
+
 	<!-- 1.配置数据库相关参数properties的属性：${url} -->
 	<context:property-placeholder location="classpath:jdbc.properties" />
 
 	<!-- 2.数据库连接池 -->
-	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
-		<!-- 配置连接池属性 -->
-		<property name="driverClass" value="${jdbc.driver}" />
-		<property name="jdbcUrl" value="${jdbc.url}" />
-		<property name="user" value="${jdbc.username}" />
-		<property name="password" value="${jdbc.password}" />
+	<!-- 测试时报错 -->
+<!--	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">-->
+<!--		&lt;!&ndash; 配置连接池属性 &ndash;&gt;-->
+<!--		<property name="driverClass" value="${jdbc.driver}" />-->
+<!--		<property name="jdbcUrl" value="${jdbc.url}" />-->
+<!--		<property name="user" value="${jdbc.username}" />-->
+<!--		<property name="password" value="${jdbc.password}" />-->
 
-		<!-- c3p0连接池的私有属性 -->
-		<property name="maxPoolSize" value="30" />
-		<property name="minPoolSize" value="10" />
-		<!-- 关闭连接后不自动commit -->
-		<property name="autoCommitOnClose" value="false" />
-		<!-- 获取连接超时时间 -->
-		<property name="checkoutTimeout" value="10000" />
-		<!-- 当获取连接失败重试次数 -->
-		<property name="acquireRetryAttempts" value="2" />
+<!--		&lt;!&ndash; c3p0连接池的私有属性 &ndash;&gt;-->
+<!--		<property name="maxPoolSize" value="30" />-->
+<!--		<property name="minPoolSize" value="10" />-->
+<!--		&lt;!&ndash; 关闭连接后不自动commit &ndash;&gt;-->
+<!--		<property name="autoCommitOnClose" value="false" />-->
+<!--		&lt;!&ndash; 获取连接超时时间 &ndash;&gt;-->
+<!--		<property name="checkoutTimeout" value="10000" />-->
+<!--		&lt;!&ndash; 当获取连接失败重试次数 &ndash;&gt;-->
+<!--		<property name="acquireRetryAttempts" value="2" />-->
+<!--	</bean>-->
+
+	<bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource"
+		  init-method="init" destroy-method="close">
+		<property name="driverClassName" value="${jdbc.driver}" />
+		<property name="url" value="${jdbc.url}" />
+		<property name="username" value="${jdbc.username}" />
+		<property name="password" value="${jdbc.password}" />
+		<!-- 配置初始化大小、最小、最大 -->
+		<property name="initialSize" value="1" />
+		<property name="minIdle" value="1" />
+		<property name="maxActive" value="10" />
+		<!-- 配置获取连接等待超时的时间 -->
+		<property name="maxWait" value="10000" />
+		<!-- 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 -->
+		<property name="timeBetweenEvictionRunsMillis" value="60000" />
+		<!-- 配置一个连接在池中最小生存的时间，单位是毫秒 -->
+		<property name="minEvictableIdleTimeMillis" value="300000" />
+		<property name="testWhileIdle" value="true" />
+		<!-- 这里建议配置为TRUE，防止取到的连接不可用 -->
+		<property name="testOnBorrow" value="true" />
+		<property name="testOnReturn" value="false" />
+		<!-- 打开PSCache，并且指定每个连接上PSCache的大小 -->
+		<property name="poolPreparedStatements" value="true" />
+		<property name="maxPoolPreparedStatementPerConnectionSize"  value="20" />
+		<!-- 这里配置提交方式，默认就是TRUE，可以不用配置 -->
+		<property name="defaultAutoCommit" value="true" />
+		<!-- 验证连接有效与否的SQL，不同的数据配置不同 -->
+		<property name="validationQuery" value="select 1 " />
+		<property name="filters" value="stat" />
+<!--		<property name="proxyFilters">-->
+<!--			<list>-->
+<!--				<ref bean="logFilter" />-->
+<!--			</list>-->
+<!--		</property>-->
 	</bean>
 
 	<!-- 3.配置SqlSessionFactory对象 -->
@@ -47,4 +84,27 @@
 		<!-- 给出需要扫描Dao接口包 -->
 		<property name="basePackage" value="com.darcy.dao" />
 	</bean>
+
+
+	<!-- zebra-dao配置 -->
+
+	<!-- 3.4步的sqlSessionFactory和MapperScannerConfigurer可以替换为如下 -->
+	<!--第3步：配置SqlSessionFactoryBean-->
+<!--	<bean id="zebraSqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">-->
+<!--		&lt;!&ndash;dataource&ndash;&gt;-->
+<!--		<property name="dataSource" ref="dataSource"/>-->
+<!--		&lt;!&ndash; 配置MyBaties全局配置文件:mybatis-config.xml &ndash;&gt;-->
+<!--		<property name="configLocation" value="classpath:mybatis-config.xml" />-->
+<!--		&lt;!&ndash;Mapper files&ndash;&gt;-->
+<!--		<property name="mapperLocations" value="classpath*:mapper/*.xml" />-->
+<!--		&lt;!&ndash;这里改成实际entity目录,如果有多个，可以用,;\t\n进行分割&ndash;&gt;-->
+<!--		<property name="typeAliasesPackage" value="com.darcy.entity" />-->
+<!--	</bean>-->
+
+<!--	&lt;!&ndash;第4步：配置ZebraMapperScannerConfigurer&ndash;&gt;-->
+<!--	<bean class="com.dianping.zebra.dao.mybatis.ZebraMapperScannerConfigurer">-->
+<!--		&lt;!&ndash;这里改成实际dao目录,如果有多个，可以用,;\t\n进行分割&ndash;&gt;-->
+<!--		<property name="basePackage" value="com.darcy.dao" />-->
+<!--		<property name="sqlSessionFactoryBeanName" value="zebraSqlSessionFactory"/>-->
+<!--	</bean>-->
 </beans>
