@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx" xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop-4.3.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:component-scan base-package="com.darcy.demo.aop"/>
+
+    <!-- 简单测试 -->
+<!--    <aop:config>-->
+<!--        <aop:aspect id="time" ref="timeHandler">-->
+<!--            <aop:pointcut id="addAllMethod" expression="execution(* com.darcy.demo.aop.HelloWorld.*(..))" /> &lt;!&ndash; 接口 &ndash;&gt;-->
+<!--            <aop:before method="printTime" pointcut-ref="addAllMethod" />-->
+<!--            <aop:after method="printTime" pointcut-ref="addAllMethod" />-->
+<!--        </aop:aspect>-->
+<!--    </aop:config>-->
+
+    <!-- 多个切面 -->
+<!--    <aop:config>-->
+<!--        <aop:aspect id="time" ref="timeHandler" order="1">-->
+<!--            <aop:pointcut id="addTime" expression="execution(* com.darcy.demo.aop.HelloWorld.*(..))" />-->
+<!--            <aop:before method="printTime" pointcut-ref="addTime" />-->
+<!--            <aop:after method="printTime" pointcut-ref="addTime" />-->
+<!--        </aop:aspect>-->
+<!--        <aop:aspect id="log" ref="logHandler" order="2">-->
+<!--            <aop:pointcut id="printLog" expression="execution(* com.darcy.demo.aop.HelloWorld.*(..))" />-->
+<!--            <aop:before method="LogBefore" pointcut-ref="printLog" />-->
+<!--            <aop:after method="LogAfter" pointcut-ref="printLog" />-->
+<!--        </aop:aspect>-->
+<!--    </aop:config>-->
+
+    <!-- 只想织入接口中的某些方法 -->
+    <aop:config>
+        <aop:aspect id="time" ref="timeHandler" order="1">
+            <aop:pointcut id="addTime" expression="execution(* com.darcy.demo.aop.HelloWorld.print*(..))" />
+            <aop:before method="printTime" pointcut-ref="addTime" />
+            <aop:after method="printTime" pointcut-ref="addTime" />
+        </aop:aspect>
+        <aop:aspect id="log" ref="logHandler" order="2">
+            <aop:pointcut id="printLog" expression="execution(* com.darcy.demo.aop.HelloWorld.do*(..))" />
+            <aop:before method="LogBefore" pointcut-ref="printLog" />
+            <aop:after method="LogAfter" pointcut-ref="printLog" />
+        </aop:aspect>
+    </aop:config>
+
+</beans>

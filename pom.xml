@@ -79,6 +79,14 @@
         <version>${spring.version}</version>
       </dependency>
 
+      <!--5) spring aop -->
+      <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-aop</artifactId>
+        <version>${spring.version}</version>
+      </dependency>
+
+
       <!-- lombok 简化getter/setter; construction -->
       <dependency>
         <groupId>org.projectlombok</groupId>

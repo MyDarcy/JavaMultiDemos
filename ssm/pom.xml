@@ -141,6 +141,9 @@
             <artifactId>spring-test</artifactId>
         </dependency>
 
+        <!-- 5) spring-aop -->
+        
+
         <!-- redis客户端:Jedis -->
         <dependency>
             <groupId>redis.clients</groupId>
