@@ -58,7 +58,7 @@ public class Main1 {
   }
 
 }
-/* 简单测试
+/* 1. 简单测试 对应aop.xml中的配置
 CurrentTime = 1563508948357
 Enter HelloWorldImpl1.printHelloWorld()
 CurrentTime = 1563508948357
@@ -76,7 +76,26 @@ Enter HelloWorldImpl2.doPrint()
 CurrentTime = 1563508948358
  */
 
-/* 多个切面
+/* 2. around通知;
+CurrentTime = 1563849805889
+Enter HelloWorldImpl1.printHelloWorld()
+CurrentTime = 1563849805889
+
+CurrentTime = 1563849805889
+Enter HelloWorldImpl1.doPrint()
+CurrentTime = 1563849805889
+
+CurrentTime = 1563849805889
+Enter HelloWorldImpl2.printHelloWorld()
+CurrentTime = 1563849805890
+
+CurrentTime = 1563849805890
+Enter HelloWorldImpl2.doPrint()
+CurrentTime = 1563849805890
+
+ */
+
+/* 3. 多个切面
 CurrentTime = 1563509370935
 Log before method
 Enter HelloWorldImpl1.printHelloWorld()
@@ -102,7 +121,7 @@ Log after method
 CurrentTime = 1563509370939
  */
 
-/* 只想织入接口中的某些方法
+/* 4. 只想织入接口中的某些方法
 CurrentTime = 1563512721478
 Enter HelloWorldImpl1.printHelloWorld()
 CurrentTime = 1563512721478
