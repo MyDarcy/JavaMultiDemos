@@ -2,6 +2,9 @@ package com.darcy.demo.aop;
 
 import org.springframework.stereotype.Component;
 
+/**
+ * 横切关注点，打日志;
+ */
 @Component
 public class LogHandler {
 
