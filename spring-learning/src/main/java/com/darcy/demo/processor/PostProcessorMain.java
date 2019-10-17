@@ -16,7 +16,7 @@ public class PostProcessorMain {
 
   }
 }
-/*
+/* 执行逻辑解释:
 BeanFactoryPostProcessor在bean实例化之前执行，
 之后实例化bean（调用构造函数，并调用set方法注入属性值），
 然后在调用两个初始化方法前后，执行了BeanPostProcessor。初始化方法的执行顺序是，先执行afterPropertiesSet，再执行init-method。
@@ -24,18 +24,18 @@ BeanFactoryPostProcessor在bean实例化之前执行，
 
 /* output
 
-调用MyBeanFactoryPostProcessor的postProcessBeanFactory
+调用MyBeanFactoryPostProcessor的postProcessBeanFactory // 1.
 
-MyJavaBean的构造函数被执行啦
+MyJavaBean的构造函数被执行啦 // 2.
 调用setDesc方法
 调用setRemark方法
 
-BeanPostProcessor，对象myJavaBean调用初始化方法之前的数据： [描述：原始的描述信息， 备注：在BeanFactoryPostProcessor中修改之后的备忘信息]
+BeanPostProcessor，对象myJavaBean调用初始化方法之前的数据： [描述：原始的描述信息， 备注：在BeanFactoryPostProcessor中修改之后的备忘信息] // 3.
 调用afterPropertiesSet方法
 调用initMethod方法
 BeanPostProcessor，对象myJavaBean调用初始化方法之后的数据：[描述：在初始化方法中修改之后的描述信息， 备注：在BeanFactoryPostProcessor中修改之后的备忘信息]
 
-===============下面输出结果============
+===============下面输出结果============ // 4.
 描述：在初始化方法中修改之后的描述信息
 备注：在BeanFactoryPostProcessor中修改之后的备忘信息
 

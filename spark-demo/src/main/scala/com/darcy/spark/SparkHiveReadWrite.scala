@@ -9,17 +9,17 @@ import org.apache.spark.sql.SparkSession
   */
 object SparkHiveReadWrite {
 
-  private val  path:String = "/user/darcy/iteblog.json"
+  private val path: String = "/user/darcy/iteblog.json"
 
   def main(args: Array[String]): Unit = {
     val warehouseLocation = "hdfs://localhost:9000/user/hive122/warehouse"
     val localWarehouselocation = "file:///Users/darcy/IdeaProjects/multidemos/spark-warehouse"
     val spark = SparkSession.builder()
-            .master("local")
-            .appName("spark-hive-read-write") //
-//            .config("spark.sql.warehouse.dir",warehouseLocation)
-            .enableHiveSupport()
-            .getOrCreate()
+      .master("local")
+      .appName("spark-hive-read-write") //
+      //            .config("spark.sql.warehouse.dir",warehouseLocation)
+      .enableHiveSupport()
+      .getOrCreate()
 
     spark.catalog.listDatabases().show(false)
     spark.catalog.listTables("mydb").show(false)
@@ -45,7 +45,7 @@ object SparkHiveReadWrite {
     ))
 
     val renamedResult = langPercentDataFrame.withColumnRenamed("_1", "language")
-            .withColumnRenamed("_2", "percent")
+      .withColumnRenamed("_2", "percent")
 
     renamedResult.orderBy("percent").show(false)
   }
