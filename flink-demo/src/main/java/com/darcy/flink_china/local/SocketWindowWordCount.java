@@ -68,6 +68,7 @@ public class SocketWindowWordCount {
             for (String word : value.split("\\s")) {
               out.collect(new WordWithCount(word, 1L));
             }
+            System.out.println("flatMap str:" + value);
           }
         })
         .keyBy("word")

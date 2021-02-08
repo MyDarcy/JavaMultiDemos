@@ -88,6 +88,7 @@ public class WordCountBatch {
 					out.collect(new Tuple2<String, Integer>(token, 1));
 				}
 			}
+			System.out.println("flatMap value:" + value);
 		}
 	}
 }

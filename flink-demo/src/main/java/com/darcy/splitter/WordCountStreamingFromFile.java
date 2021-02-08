@@ -54,7 +54,8 @@ public class WordCountStreamingFromFile {
 		final StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
 
 		// get input data from text file under resources/
-		DataStream<String> text = env.readTextFile(WordCountStreamingFromFile.class.getClassLoader().getResource("Text.txt").getPath())
+		String fileName = "/Users/darcy/IdeaProjects/JavaMultiDemos/flink-demo/src/main/java/com/darcy/splitter/WordCountStreamingFromFile.java";
+		DataStream<String> text = env.readTextFile(WordCountStreamingFromFile.class.getClassLoader().getResource(fileName).getPath())
 				.setParallelism(1);
 
 		DataStream<Tuple2<String, Integer>> counts =
@@ -68,7 +69,7 @@ public class WordCountStreamingFromFile {
 		// execute and print result
 		counts.print().setParallelism(1);
 		
-        env.execute(jobName);
+		env.execute(jobName);
 	}
 
 	/**
@@ -88,6 +89,7 @@ public class WordCountStreamingFromFile {
 					out.collect(new Tuple2<String, Integer>(token, 1));
 				}
 			}
+			System.out.println("flatMap value:" + value);
 		}
 	}
 }

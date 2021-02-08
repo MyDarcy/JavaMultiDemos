@@ -57,6 +57,7 @@ public class SocketTextStreamWordCount {
                     collector.collect(new Tuple2<>(token, 1));
                 }
             }
+            System.out.println("flatMap value:" + s);
         }
     }
 }
