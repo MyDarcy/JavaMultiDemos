@@ -21,7 +21,7 @@
         <scala.2.11.spark.2.3.3>2.3.3</scala.2.11.spark.2.3.3>
         <scala.version>2.11.8</scala.version>
         <hadoop.version>2.9.1</hadoop.version>
-        <hive.version>1.2.1</hive.version>
+        <hive.version>3.1.2</hive.version>
     </properties>
 
     <dependencies>
